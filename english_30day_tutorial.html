@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Din mein English Seekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06080f;
+  --surface: #0e1117;
+  --card: #141921;
+  --card2: #1a2030;
+  --gold: #f5c842;
+  --gold2: #e8b800;
+  --teal: #2dd4bf;
+  --rose: #fb7185;
+  --violet: #a78bfa;
+  --green: #4ade80;
+  --orange: #fb923c;
+  --blue: #60a5fa;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --border: #1e293b;
+  --week1: #f5c842;
+  --week2: #2dd4bf;
+  --week3: #a78bfa;
+  --week4: #fb7185;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Sora','Noto Sans Devanagari',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* ===== HERO ===== */
+.hero{
+  background: linear-gradient(160deg,#060d1f 0%,#0a1628 40%,#0d1f12 100%);
+  padding:50px 20px 40px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 50%,rgba(245,200,66,.08),transparent),
+    radial-gradient(ellipse 50% 60% at 80% 30%,rgba(45,212,191,.06),transparent);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.3);
+  border-radius:30px;padding:6px 18px;font-size:.8rem;font-weight:700;
+  color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:18px;
+}
+.hero h1{
+  font-size:clamp(2rem,7vw,4rem);font-weight:800;line-height:1.1;
+  background:linear-gradient(135deg,#f5c842,#4ade80,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:14px;position:relative;z-index:1;
+}
+.hero-sub{color:#94a3b8;font-size:clamp(.95rem,2.5vw,1.2rem);max-width:600px;margin:0 auto 24px;line-height:1.6;position:relative;z-index:1;}
+.hero-stats{
+  display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+.stat{text-align:center;}
+.stat-num{font-size:1.8rem;font-weight:800;color:var(--gold);}
+.stat-label{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar-wrap{
+  background:var(--surface);padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.progress-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.prog-label{font-size:.8rem;color:var(--muted);white-space:nowrap;}
+.prog-track{flex:1;height:6px;background:var(--border);border-radius:6px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--teal));border-radius:6px;transition:width .5s ease;width:3.33%;}
+.prog-count{font-size:.8rem;color:var(--gold);font-weight:700;white-space:nowrap;}
+
+/* ===== MAIN LAYOUT ===== */
+.layout{display:flex;max-width:1100px;margin:0 auto;min-height:calc(100vh - 180px);}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:260px;flex-shrink:0;
+  background:var(--surface);border-right:1px solid var(--border);
+  padding:20px 0;position:sticky;top:57px;height:calc(100vh - 57px);
+  overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+.week-group{margin-bottom:4px;}
+.week-header{
+  padding:10px 18px;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.5px;
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  transition:background .2s;
+}
+.week-header:hover{background:rgba(255,255,255,.03);}
+.week-dot{width:8px;height:8px;border-radius:50%;}
+.w1{background:var(--week1);}
+.w2{background:var(--week2);}
+.w3{background:var(--week3);}
+.w4{background:var(--week4);}
+.week-title{color:var(--muted);}
+
+.day-item{
+  padding:8px 18px 8px 34px;font-size:.82rem;cursor:pointer;
+  color:var(--muted);transition:all .15s;
+  border-left:2px solid transparent;
+  display:flex;align-items:center;gap:8px;
+}
+.day-item:hover{color:var(--text);background:rgba(255,255,255,.03);}
+.day-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(245,200,66,.05);}
+.day-item.done{color:var(--green);}
+.day-item.done::before{content:'✓';font-size:.7rem;color:var(--green);}
+
+/* ===== CONTENT ===== */
+.content{flex:1;padding:30px 28px 80px;overflow-x:hidden;}
+
+.day-section{display:none;}
+.day-section.active{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* Day header */
+.day-header{margin-bottom:28px;}
+.day-num-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.25);
+  border-radius:8px;padding:5px 14px;font-size:.78rem;font-weight:700;
+  color:var(--gold);margin-bottom:12px;
+}
+.day-title{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;line-height:1.2;margin-bottom:8px;}
+.day-desc{color:var(--muted);font-size:.95rem;line-height:1.7;max-width:620px;}
+
+/* Lesson blocks */
+.lesson-block{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:22px 24px;margin-bottom:18px;
+  transition:border-color .2s;
+}
+.lesson-block:hover{border-color:rgba(245,200,66,.25);}
+.block-title{
+  font-size:1rem;font-weight:700;color:var(--gold);
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+
+/* Phrase rows */
+.phrase-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px solid rgba(30,41,59,.8);
+  cursor:pointer;transition:background .15s;border-radius:8px;padding:10px 10px;
+}
+.phrase-row:hover{background:rgba(255,255,255,.03);}
+.phrase-row:last-child{border-bottom:none;}
+.speak-btn{
+  background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);
+  border-radius:8px;padding:6px 10px;cursor:pointer;color:var(--gold);
+  font-size:.8rem;white-space:nowrap;flex-shrink:0;transition:all .15s;
+  font-family:inherit;
+}
+.speak-btn:hover{background:rgba(245,200,66,.2);}
+.phrase-en{font-size:1rem;font-weight:600;color:var(--text);}
+.phrase-hi{font-size:.85rem;color:#94a3b8;margin-top:2px;}
+.phrase-pron{font-size:.78rem;color:var(--muted);margin-top:2px;font-style:italic;}
+
+/* Rule boxes */
+.rule-box{
+  background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(45,212,191,.05));
+  border:1px solid rgba(167,139,250,.2);border-radius:14px;
+  padding:18px 20px;margin-bottom:14px;
+}
+.rule-head{font-size:.95rem;font-weight:700;color:var(--violet);margin-bottom:10px;display:flex;gap:8px;align-items:center;}
+.formula{
+  background:rgba(0,0,0,.4);border-radius:10px;padding:10px 14px;
+  font-family:'Courier New',monospace;font-size:.95rem;color:var(--gold);
+  margin:8px 0;letter-spacing:.5px;
+}
+.eg-good{color:var(--green);font-size:.92rem;margin:4px 0;}
+.eg-bad{color:var(--rose);font-size:.92rem;margin:4px 0;text-decoration:line-through;}
+.eg-note{color:var(--muted);font-size:.82rem;margin-top:8px;line-height:1.6;}
+
+/* Vocab grid */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px;}
+.vocab-card{
+  background:var(--card2);border:1px solid var(--border);border-radius:12px;
+  padding:12px;text-align:center;cursor:pointer;transition:all .2s;
+}
+.vocab-card:hover{border-color:var(--teal);transform:scale(1.04);}
+.v-emoji{font-size:1.8rem;margin-bottom:4px;}
+.v-en{font-size:.9rem;font-weight:700;color:var(--teal);}
+.v-hi{font-size:.75rem;color:var(--muted);}
+.v-pron{font-size:.7rem;color:rgba(100,116,139,.7);font-style:italic;}
+
+/* Conversation box */
+.conv-box{
+  background:var(--card2);border-radius:14px;padding:18px;
+  border:1px solid var(--border);margin-top:8px;
+}
+.conv-line{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;}
+.conv-line:last-child{margin-bottom:0;}
+.conv-speaker{
+  background:var(--border);border-radius:6px;padding:3px 8px;
+  font-size:.7rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px;
+}
+.conv-speaker.a{background:rgba(245,200,66,.15);color:var(--gold);}
+.conv-speaker.b{background:rgba(45,212,191,.12);color:var(--teal);}
+.conv-text{font-size:.9rem;line-height:1.6;}
+.conv-hi{font-size:.78rem;color:var(--muted);}
+
+/* Mistake cards */
+.mistake{
+  background:var(--card2);border-radius:12px;padding:14px 16px;
+  border-left:3px solid var(--rose);margin-bottom:12px;
+}
+.m-wrong{color:var(--rose);font-size:.95rem;font-weight:600;}
+.m-right{color:var(--green);font-size:.95rem;font-weight:600;margin-top:4px;}
+.m-why{color:var(--muted);font-size:.82rem;margin-top:6px;line-height:1.5;}
+
+/* Quiz inside day */
+.mini-quiz{background:var(--card2);border-radius:14px;padding:18px;border:1px solid var(--border);}
+.mq-q{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:12px;}
+.mq-opts{display:flex;flex-direction:column;gap:8px;}
+.mq-opt{
+  background:rgba(255,255,255,.04);border:1.5px solid var(--border);
+  border-radius:9px;padding:10px 14px;cursor:pointer;
+  font-size:.88rem;color:var(--text);text-align:left;
+  font-family:inherit;transition:all .15s;
+}
+.mq-opt:hover{border-color:var(--violet);color:var(--violet);}
+.mq-opt.ok{border-color:var(--green);background:rgba(74,222,128,.08);color:var(--green);}
+.mq-opt.no{border-color:var(--rose);background:rgba(251,113,133,.08);color:var(--rose);}
+.mq-fb{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.82rem;display:none;}
+.mq-fb.show{display:block;}
+.mq-fb.ok{background:rgba(74,222,128,.08);color:var(--green);border:1px solid rgba(74,222,128,.2);}
+.mq-fb.no{background:rgba(251,113,133,.08);color:var(--rose);border:1px solid rgba(251,113,133,.2);}
+
+/* Navigation buttons */
+.day-nav{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+.nav-btn{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:10px;padding:11px 22px;cursor:pointer;
+  font-size:.88rem;font-weight:600;color:var(--text);
+  font-family:inherit;transition:all .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold);}
+.nav-btn.primary{background:var(--gold);color:#000;border-color:var(--gold);}
+.nav-btn.primary:hover{background:var(--gold2);}
+.done-btn{
+  background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(45,212,191,.1));
+  border:1.5px solid rgba(74,222,128,.3);color:var(--green);
+}
+
+/* Tip highlight */
+.tip-highlight{
+  background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(245,200,66,.05));
+  border:1px solid rgba(251,146,60,.25);border-radius:12px;
+  padding:14px 16px;margin-bottom:12px;display:flex;gap:12px;
+}
+.tip-icon{font-size:1.4rem;flex-shrink:0;}
+.tip-body{font-size:.88rem;line-height:1.7;color:var(--text);}
+.tip-body strong{color:var(--orange);}
+
+/* Week overview */
+.week-overview{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;
+  margin-bottom:24px;
+}
+.week-card{
+  border-radius:14px;padding:18px;border:1px solid var(--border);
+  cursor:pointer;transition:all .2s;
+}
+.week-card:hover{transform:translateY(-3px);}
+.wc1{background:linear-gradient(135deg,rgba(245,200,66,.1),rgba(245,200,66,.03));border-color:rgba(245,200,66,.2);}
+.wc2{background:linear-gradient(135deg,rgba(45,212,191,.1),rgba(45,212,191,.03));border-color:rgba(45,212,191,.2);}
+.wc3{background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(167,139,250,.03));border-color:rgba(167,139,250,.2);}
+.wc4{background:linear-gradient(135deg,rgba(251,113,133,.1),rgba(251,113,133,.03));border-color:rgba(251,113,133,.2);}
+.wc-week{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.wc1 .wc-week{color:var(--gold);}
+.wc2 .wc-week{color:var(--teal);}
+.wc3 .wc-week{color:var(--violet);}
+.wc4 .wc-week{color:var(--rose);}
+.wc-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.wc-desc{font-size:.78rem;color:var(--muted);line-height:1.5;}
+
+/* Pronunciation guide */
+.pron-table{width:100%;border-collapse:collapse;margin-top:8px;}
+.pron-table th{background:rgba(245,200,66,.1);color:var(--gold);padding:8px 12px;text-align:left;font-size:.82rem;}
+.pron-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:.85rem;}
+.pron-table tr:hover td{background:rgba(255,255,255,.02);}
+
+/* Mobile sidebar toggle */
+.mob-menu-btn{
+  display:none;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:8px 14px;cursor:pointer;
+  color:var(--text);font-family:inherit;font-size:.85rem;font-weight:600;
+  margin-bottom:16px;align-items:center;gap:6px;
+}
+
+/* Celebration */
+.celebrate{
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(74,222,128,.1));
+  border:2px solid rgba(245,200,66,.3);border-radius:16px;
+  padding:24px;text-align:center;
+}
+.celebrate-emoji{font-size:3rem;margin-bottom:10px;}
+.celebrate h3{font-size:1.3rem;font-weight:800;color:var(--gold);margin-bottom:6px;}
+.celebrate p{color:var(--muted);font-size:.9rem;line-height:1.6;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{
+    position:fixed;left:-280px;top:0;bottom:0;z-index:200;
+    transition:left .3s ease;width:280px;height:100vh;padding-top:60px;
+  }
+  .sidebar.open{left:0;}
+  .sidebar-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:199;
+  }
+  .sidebar-overlay.show{display:block;}
+  .mob-menu-btn{display:flex;}
+  .content{padding:20px 14px 80px;}
+  .vocab-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🚀 Complete Course</div>
+  <h1>30 Din mein<br>English Seekho!</h1>
+  <p class="hero-sub">Basic se Advanced tak — हर दिन नया lesson, नए phrases, grammar rules, और quiz। हिंदी में समझाया, English में सिखाया।</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">30</div><div class="stat-label">Days</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Weeks</div></div>
+    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Phrases</div></div>
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Words</div></div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <span class="prog-label">Progress</span>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <span class="prog-count" id="progCount">0/30</span>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="week-group">
+      <div class="week-header"><span class="week-dot w1"></span><span class="week-title">WEEK 1 — BASICS</span></div>
+      <div id="sidebarW1"></div>
+    </div>
+    <div class="week-group">
+      <div class="week-header"><span class="week-dot w2"></span><span class="week-title">WEEK 2 — BUILD UP</span></div>
+      <div id="sidebarW2"></div>
+    </div>
+    <div class="week-group">
+      <div class="week-header"><span class="week-dot w3"></span><span class="week-title">WEEK 3 — GRAMMAR+</span></div>
+      <div id="sidebarW3"></div>
+    </div>
+    <div class="week-group">
+      <div class="week-header"><span class="week-dot w4"></span><span class="week-title">WEEK 4 — ADVANCED</span></div>
+      <div id="sidebarW4"></div>
+    </div>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- CONTENT -->
+  <main class="content" id="mainContent">
+    <button class="mob-menu-btn" onclick="openSidebar()">☰ सभी दिन देखें</button>
+    <div id="dayContent"></div>
+  </main>
+</div>
+
+<script>
+// ============================================================
+// DATA — 30 DAYS
+// ============================================================
+const days = [
+// ==================== WEEK 1 ====================
+{
+  id:1,week:1,
+  title:"पहला कदम — Alphabets & Sounds",
+  desc:"आज हम English के अक्षर और उनकी आवाज़ें सीखेंगे। यह foundation है — बिना इसके आगे बढ़ना मुश्किल है।",
+  blocks:[
+    {type:'overview', content:`
+      <div class="week-overview">
+        <div class="week-card wc1" onclick="goToDay(1)"><div class="wc-week">Week 1</div><div class="wc-title">Basics</div><div class="wc-desc">Alphabets, Greetings, Numbers, Colors, Days</div></div>
+        <div class="week-card wc2" onclick="goToDay(8)"><div class="wc-week">Week 2</div><div class="wc-title">Build Up</div><div class="wc-desc">Sentences, Tenses, Questions, Daily Life</div></div>
+        <div class="week-card wc3" onclick="goToDay(15)"><div class="wc-week">Week 3</div><div class="wc-title">Grammar+</div><div class="wc-desc">Advanced Grammar, Vocabulary, Speaking</div></div>
+        <div class="week-card wc4" onclick="goToDay(22)"><div class="wc-week">Week 4</div><div class="wc-title">Advanced</div><div class="wc-desc">Fluency, Idioms, Professional English</div></div>
+      </div>`},
+    {type:'rule', title:'🔤 English Alphabet — 26 Letters', content:`
+      <div class="formula">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
+      <div class="eg-note">
+        <b style="color:var(--gold)">Vowels (स्वर):</b> A, E, I, O, U — ये 5 vowels हैं।<br>
+        <b style="color:var(--teal)">Consonants (व्यंजन):</b> बाकी 21 letters consonants हैं।
+      </div>`},
+    {type:'rule', title:'🗣️ Pronunciation Tips — उच्चारण', content:`
+      <table class="pron-table">
+        <tr><th>Letter</th><th>Sound (Hindi)</th><th>Example</th></tr>
+        <tr><td>A</td><td>ए / आ</td><td>Apple = ऐपल</td></tr>
+        <tr><td>B</td><td>ब</td><td>Ball = बॉल</td></tr>
+        <tr><td>C</td><td>क / स</td><td>Cat=कैट, City=सिटी</td></tr>
+        <tr><td>G</td><td>ग / ज</td><td>Go=गो, Gem=जेम</td></tr>
+        <tr><td>J</td><td>ज</td><td>Juice = जूस</td></tr>
+        <tr><td>Ph</td><td>फ</td><td>Phone = फ़ोन</td></tr>
+        <tr><td>Sh</td><td>श</td><td>Shop = शॉप</td></tr>
+        <tr><td>Th</td><td>थ/द</td><td>Think=थिंक, The=द</td></tr>
+        <tr><td>W</td><td>व (होठ गोल)</td><td>Water = वॉटर</td></tr>
+      </table>`},
+    {type:'tip', icon:'💡', text:`<strong>आज का Practice:</strong> आईने के सामने खड़े होकर A से Z तक ज़ोर से बोलो। हर letter को 3 बार repeat करो। यही आपकी pronunciation का base बनाएगा।`},
+    {type:'quiz', q:'कौन सा vowel है?', opts:['B','C','E','G'], ans:2, fb:'E एक vowel है। Vowels हैं: A, E, I, O, U'}
+  ]
+},{
+  id:2,week:1,
+  title:"Greetings & Introductions",
+  desc:"आज हम सीखेंगे खुद को English में कैसे introduce करें और दूसरों से कैसे मिलें।",
+  blocks:[
+    {type:'phrases', title:'🤝 Greetings — मिलना-जुलना', phrases:[
+      {en:'Good morning!',hi:'सुप्रभात!',pr:'गुड मॉर्निंग'},
+      {en:'Good afternoon!',hi:'नमस्ते! (दोपहर)',pr:'गुड आफ्टरनून'},
+      {en:'Good evening!',hi:'शुभ संध्या!',pr:'गुड ईवनिंग'},
+      {en:'Good night!',hi:'शुभ रात्रि!',pr:'गुड नाइट'},
+      {en:'Hello! / Hi!',hi:'नमस्ते!',pr:'हेलो / हाई'},
+      {en:'How are you?',hi:'आप कैसे हैं?',pr:'हाउ आर यू?'},
+      {en:'I am fine, thank you.',hi:'मैं ठीक हूँ, धन्यवाद।',pr:'आई एम फाइन, थैंक यू'},
+      {en:'Nice to meet you!',hi:'आपसे मिलकर खुशी हुई!',pr:'नाइस टू मीट यू'},
+    ]},
+    {type:'phrases', title:'👤 Introduction — परिचय', phrases:[
+      {en:'My name is Rahul.',hi:'मेरा नाम राहुल है।',pr:'माई नेम इज़ राहुल'},
+      {en:'I am from Delhi.',hi:'मैं दिल्ली से हूँ।',pr:'आई एम फ्रॉम दिल्ली'},
+      {en:'I am 25 years old.',hi:'मेरी उम्र 25 साल है।',pr:'आई एम 25 ईयर्स ओल्ड'},
+      {en:'I am a student.',hi:'मैं एक छात्र हूँ।',pr:'आई एम अ स्टूडेंट'},
+      {en:'What is your name?',hi:'आपका नाम क्या है?',pr:'व्हॉट इज़ योर नेम?'},
+      {en:'Where are you from?',hi:'आप कहाँ से हैं?',pr:'व्हेयर आर यू फ्रॉम?'},
+    ]},
+    {type:'conversation', title:'💬 Conversation Practice', lines:[
+      {sp:'A',text:'Hello! My name is Priya.',hi:'हेलो! मेरा नाम प्रिया है।'},
+      {sp:'B',text:'Hi Priya! I am Arjun. Nice to meet you!',hi:'हाय प्रिया! मैं अर्जुन हूँ। मिलकर खुशी हुई!'},
+      {sp:'A',text:'Nice to meet you too! Where are you from?',hi:'मुझे भी खुशी हुई! आप कहाँ से हैं?'},
+      {sp:'B',text:'I am from Mumbai. And you?',hi:'मैं मुंबई से हूँ। और आप?'},
+      {sp:'A',text:'I am from Delhi.',hi:'मैं दिल्ली से हूँ।'},
+    ]},
+    {type:'tip', icon:'🎯', text:`<strong>Practice करो:</strong> अपने किसी दोस्त या परिवार के सदस्य से English में introduce करो। अगर कोई नहीं है तो आईने में खुद से करो!`},
+    {type:'quiz', q:'"मेरा नाम राम है" को English में कहो:', opts:['I am Ram.','My name is Ram.','Name my Ram is.','Ram is my name.'], ans:1, fb:'"My name is Ram." — यह सबसे common और सही तरीका है।'}
+  ]
+},{
+  id:3,week:1,
+  title:"Numbers & Time",
+  desc:"आज हम 1 से 100 तक numbers, time बताना, और dates सीखेंगे।",
+  blocks:[
+    {type:'rule', title:'🔢 Numbers 1-20', content:`
+      <div class="vocab-grid">
+        ${[['1','One','वन'],['2','Two','टू'],['3','Three','थ्री'],['4','Four','फोर'],['5','Five','फाइव'],
+           ['6','Six','सिक्स'],['7','Seven','सेवन'],['8','Eight','एट'],['9','Nine','नाइन'],['10','Ten','टेन'],
+           ['11','Eleven','इलेवन'],['12','Twelve','ट्वेल्व'],['13','Thirteen','थर्टीन'],['15','Fifteen','फिफ्टीन'],
+           ['20','Twenty','ट्वेंटी']].map(n=>`
+          <div class="vocab-card" onclick="speak('${n[1]}')">
+            <div class="v-emoji" style="font-size:1.2rem;color:var(--gold);font-weight:800">${n[0]}</div>
+            <div class="v-en">${n[1]}</div>
+            <div class="v-hi">${n[2]}</div>
+          </div>`).join('')}
+      </div>`},
+    {type:'rule', title:'🕐 Telling Time — समय बताना', content:`
+      <div class="formula">It is + [number] + o'clock</div>
+      <div class="eg-good">✅ It is 3 o'clock. (तीन बज गए।)</div>
+      <div class="eg-good">✅ It is half past 4. (साढ़े चार बजे हैं।)</div>
+      <div class="eg-good">✅ It is quarter to 6. (पौने छह बजे हैं।)</div>
+      <div class="eg-good">✅ It is 10:30 AM. (सुबह दस बजकर तीस मिनट।)</div>
+      <div class="eg-note">
+        <b style="color:var(--gold)">पूछने का तरीका:</b> "What time is it?" — "कितने बजे हैं?"<br>
+        <b style="color:var(--teal)">AM</b> = रात 12 से दोपहर 12 बजे तक<br>
+        <b style="color:var(--violet)">PM</b> = दोपहर 12 से रात 12 बजे तक
+      </div>`},
+    {type:'phrases', title:'📅 Days of the Week', phrases:[
+      {en:'Monday',hi:'सोमवार',pr:'मंडे'},
+      {en:'Tuesday',hi:'मंगलवार',pr:'ट्यूज़डे'},
+      {en:'Wednesday',hi:'बुधवार',pr:'वेडनेज़डे'},
+      {en:'Thursday',hi:'गुरुवार',pr:'थर्स्डे'},
+      {en:'Friday',hi:'शुक्रवार',pr:'फ्राइडे'},
+      {en:'Saturday',hi:'शनिवार',pr:'सैटर्डे'},
+      {en:'Sunday',hi:'रविवार',pr:'संडे'},
+    ]},
+    {type:'quiz', q:'"What time is it?" का मतलब है:', opts:['आप कहाँ हैं?','कितने बजे हैं?','आपका नाम क्या है?','कितने पैसे हैं?'], ans:1, fb:'"What time is it?" = "कितने बजे हैं?" — यह सबसे common question है।'}
+  ]
+},{
+  id:4,week:1,
+  title:"Colors, Shapes & Sizes",
+  desc:"रंग, आकार और आकार के बारे में बात करना — रोज़ की life में बहुत ज़रूरी!",
+  blocks:[
+    {type:'vocab', title:'🎨 Colors — रंग', words:[
+      {em:'🔴',en:'Red',hi:'लाल',pr:'रेड'},
+      {em:'🔵',en:'Blue',hi:'नीला',pr:'ब्लू'},
+      {em:'🟢',en:'Green',hi:'हरा',pr:'ग्रीन'},
+      {em:'🟡',en:'Yellow',hi:'पीला',pr:'येलो'},
+      {em:'🟠',en:'Orange',hi:'नारंगी',pr:'ऑरेंज'},
+      {em:'⚫',en:'Black',hi:'काला',pr:'ब्लैक'},
+      {em:'⚪',en:'White',hi:'सफ़ेद',pr:'व्हाइट'},
+      {em:'🟤',en:'Brown',hi:'भूरा',pr:'ब्राउन'},
+      {em:'🟣',en:'Purple',hi:'बैंगनी',pr:'पर्पल'},
+      {em:'🩷',en:'Pink',hi:'गुलाबी',pr:'पिंक'},
+    ]},
+    {type:'phrases', title:'📐 Sizes & Shapes', phrases:[
+      {en:'Big / Large',hi:'बड़ा',pr:'बिग / लार्ज'},
+      {en:'Small / Little',hi:'छोटा',pr:'स्मॉल / लिटल'},
+      {en:'Tall',hi:'लंबा',pr:'टॉल'},
+      {en:'Short',hi:'छोटा/नाटा',pr:'शॉर्ट'},
+      {en:'Round',hi:'गोल',pr:'राउंड'},
+      {en:'Square',hi:'चौकोर',pr:'स्क्वेयर'},
+      {en:'Triangle',hi:'तिकोना',pr:'ट्राएंगल'},
+    ]},
+    {type:'conversation', title:'💬 Using Colors in Sentences', lines:[
+      {sp:'A',text:'What colour is your shirt?',hi:'तुम्हारी शर्ट किस रंग की है?'},
+      {sp:'B',text:'My shirt is blue. What about yours?',hi:'मेरी शर्ट नीली है। तुम्हारी?'},
+      {sp:'A',text:'Mine is red and white.',hi:'मेरी लाल और सफ़ेद है।'},
+    ]},
+    {type:'quiz', q:'"नीला" को English में कहते हैं:', opts:['Green','Black','Blue','Brown'], ans:2, fb:'"Blue" = नीला। याद रखो: Sky is blue = आसमान नीला है।'}
+  ]
+},{
+  id:5,week:1,
+  title:"Family & Relationships",
+  desc:"परिवार के बारे में English में बात करना। जब कोई पूछे 'Tell me about your family!'",
+  blocks:[
+    {type:'vocab', title:'👨‍👩‍👧‍👦 Family Members', words:[
+      {em:'👨',en:'Father',hi:'पिता',pr:'फादर'},
+      {em:'👩',en:'Mother',hi:'माँ',pr:'मदर'},
+      {em:'👦',en:'Brother',hi:'भाई',pr:'ब्रदर'},
+      {em:'👧',en:'Sister',hi:'बहन',pr:'सिस्टर'},
+      {em:'👴',en:'Grandfather',hi:'दादा/नाना',pr:'ग्रैंडफादर'},
+      {em:'👵',en:'Grandmother',hi:'दादी/नानी',pr:'ग्रैंडमदर'},
+      {em:'👶',en:'Baby / Child',hi:'बच्चा',pr:'बेबी/चाइल्ड'},
+      {em:'💑',en:'Husband / Wife',hi:'पति/पत्नी',pr:'हज़्बेंड/वाइफ'},
+      {em:'👨‍👩‍👦',en:'Family',hi:'परिवार',pr:'फैमिली'},
+      {em:'👫',en:'Friend',hi:'दोस्त',pr:'फ्रेंड'},
+    ]},
+    {type:'phrases', title:'🗣️ Talking About Family', phrases:[
+      {en:'I have a big family.',hi:'मेरा परिवार बड़ा है।',pr:'आई हैव अ बिग फैमिली'},
+      {en:'I have one brother and two sisters.',hi:'मेरे एक भाई और दो बहनें हैं।',pr:'आई हैव वन ब्रदर एंड टू सिस्टर्स'},
+      {en:'My father is a doctor.',hi:'मेरे पिताजी डॉक्टर हैं।',pr:'माई फादर इज़ अ डॉक्टर'},
+      {en:'My mother is a homemaker.',hi:'मेरी माँ गृहिणी हैं।',pr:'माई मदर इज़ अ होममेकर'},
+      {en:'My brother lives in Mumbai.',hi:'मेरा भाई मुंबई में रहता है।',pr:'माई ब्रदर लिव्ज़ इन मुंबई'},
+    ]},
+    {type:'tip', icon:'🎯', text:`<strong>Homework:</strong> 5 sentences लिखो अपने परिवार के बारे में। जैसे: "My father's name is _. He is a _."  फिर ज़ोर से पढ़ो।`},
+    {type:'quiz', q:'"माँ" को English में कहते हैं:', opts:['Sister','Mother','Brother','Grandmother'], ans:1, fb:'"Mother" = माँ। Informal में "Mom" या "Mum" भी कहते हैं।'}
+  ]
+},{
+  id:6,week:1,
+  title:"Food & Eating",
+  desc:"खाने के बारे में English में बात करें — restaurant में order करना, पसंद बताना।",
+  blocks:[
+    {type:'vocab', title:'🍽️ Food Vocabulary', words:[
+      {em:'🍚',en:'Rice',hi:'चावल',pr:'राइस'},
+      {em:'🫓',en:'Bread / Roti',hi:'रोटी',pr:'ब्रेड/रोटी'},
+      {em:'🥗',en:'Salad',hi:'सलाद',pr:'सैलड'},
+      {em:'🍗',en:'Chicken',hi:'चिकन',pr:'चिकन'},
+      {em:'🐟',en:'Fish',hi:'मछली',pr:'फिश'},
+      {em:'🥦',en:'Vegetables',hi:'सब्ज़ियाँ',pr:'वेजिटेबल्ज़'},
+      {em:'☕',en:'Tea / Coffee',hi:'चाय/कॉफ़ी',pr:'टी/कॉफ़ी'},
+      {em:'💧',en:'Water',hi:'पानी',pr:'वॉटर'},
+      {em:'🍦',en:'Ice Cream',hi:'आइसक्रीम',pr:'आइस क्रीम'},
+      {em:'🍎',en:'Fruit',hi:'फल',pr:'फ्रूट'},
+    ]},
+    {type:'phrases', title:'🍴 At a Restaurant', phrases:[
+      {en:'A table for two, please.',hi:'दो लोगों के लिए एक टेबल चाहिए।',pr:'अ टेबल फॉर टू, प्लीज़'},
+      {en:'Can I see the menu?',hi:'क्या मैं menu देख सकता हूँ?',pr:'कैन आई सी द मेन्यू?'},
+      {en:'I would like to order.',hi:'मैं order करना चाहता हूँ।',pr:'आई वुड लाइक टू ऑर्डर'},
+      {en:'What do you recommend?',hi:'आप क्या recommend करेंगे?',pr:'व्हॉट डू यू रेकमेंड?'},
+      {en:'I am vegetarian.',hi:'मैं शाकाहारी हूँ।',pr:'आई एम वेजिटेरियन'},
+      {en:'The bill, please.',hi:'बिल लाइए, प्लीज़।',pr:'द बिल, प्लीज़'},
+      {en:'It was delicious!',hi:'यह बहुत स्वादिष्ट था!',pr:'इट वॉज़ डिलिशस!'},
+    ]},
+    {type:'quiz', q:'"I am vegetarian" का मतलब है:', opts:['मुझे भूख लगी है','मैं शाकाहारी हूँ','मुझे खाना पसंद है','मैं खाना बना सकता हूँ'], ans:1, fb:'"Vegetarian" = शाकाहारी। "Non-vegetarian" = मांसाहारी।'}
+  ]
+},{
+  id:7,week:1,
+  title:"Week 1 Review & Practice",
+  desc:"पहले हफ्ते का revision। सब कुछ जो हमने सीखा उसे दोहराएं।",
+  blocks:[
+    {type:'rule', title:'📋 Week 1 Summary', content:`
+      <div class="eg-good">✅ Day 1: Alphabets & Sounds सीखे</div>
+      <div class="eg-good">✅ Day 2: Greetings & Introduction सीखे</div>
+      <div class="eg-good">✅ Day 3: Numbers & Time सीखे</div>
+      <div class="eg-good">✅ Day 4: Colors, Shapes & Sizes सीखे</div>
+      <div class="eg-good">✅ Day 5: Family & Relationships सीखे</div>
+      <div class="eg-good">✅ Day 6: Food & Eating सीखे</div>
+      <div class="eg-note" style="margin-top:12px;">अब हम इन सबको एक conversation में use करेंगे!</div>`},
+    {type:'conversation', title:'💬 Full Introduction Practice', lines:[
+      {sp:'A',text:'Good morning! My name is Sunita. What is your name?',hi:'सुप्रभात! मेरा नाम सुनीता है। आपका नाम क्या है?'},
+      {sp:'B',text:'Good morning Sunita! My name is Vikram.',hi:'सुप्रभात सुनीता! मेरा नाम विक्रम है।'},
+      {sp:'A',text:'Nice to meet you! Where are you from?',hi:'मिलकर खुशी हुई! आप कहाँ से हैं?'},
+      {sp:'B',text:'I am from Jaipur. I have a small family — my parents and one sister.',hi:'मैं जयपुर से हूँ। मेरा छोटा परिवार है — माँ-पिताजी और एक बहन।'},
+      {sp:'A',text:'That is nice! What does your father do?',hi:'वाह! आपके पिताजी क्या करते हैं?'},
+      {sp:'B',text:'He is a teacher. Would you like some tea?',hi:'वो टीचर हैं। क्या आप चाय लेंगी?'},
+      {sp:'A',text:'Yes please! It is cold today.',hi:'हाँ please! आज ठंड है।'},
+    ]},
+    {type:'celebrate', title:'🎉 Week 1 Complete!', msg:'बधाई हो! आपने पहला हफ्ता पूरा कर लिया। अब आप basic English में खुद को introduce कर सकते हैं, time बता सकते हैं, और food order कर सकते हैं!'},
+    {type:'quiz', q:'Week 1 Final: "मेरे दो भाई हैं।" को translate करो:', opts:['I am two brothers.','I have two brothers.','Two brothers are mine.','My have two brothers.'], ans:1, fb:'"I have two brothers." — "हैं/है" के लिए "have/has" use करते हैं।'}
+  ]
+},
+// ==================== WEEK 2 ====================
+{
+  id:8,week:2,
+  title:"Present Simple Tense",
+  desc:"वर्तमान काल — जो काम रोज़ होता है या हमेशा सच हो। यह सबसे ज़रूरी tense है!",
+  blocks:[
+    {type:'rule', title:'📖 Present Simple Formula', content:`
+      <div class="formula">Subject + Verb(base/+s/es) + Object</div>
+      <div style="margin:10px 0;">
+        <b style="color:var(--gold)">Positive:</b><br>
+        <div class="eg-good">I / You / We / They + Verb → I eat, They play</div>
+        <div class="eg-good">He / She / It + Verb+s/es → He eats, She plays</div>
+      </div>
+      <div style="margin:10px 0;">
+        <b style="color:var(--rose)">Negative:</b>
+        <div class="eg-good">I/You/We/They + do not (don't) + verb</div>
+        <div class="eg-good">He/She/It + does not (doesn't) + verb</div>
+      </div>
+      <div style="margin:10px 0;">
+        <b style="color:var(--teal)">Question:</b>
+        <div class="eg-good">Do + I/You/We/They + verb?</div>
+        <div class="eg-good">Does + He/She/It + verb?</div>
+      </div>
+      <div class="eg-note"><b>कब use करें:</b> रोज़ की आदतें, सच्चाइयाँ, schedules।</div>`},
+    {type:'mistake', mistakes:[
+      {w:'She don\'t like tea.',r:'She doesn\'t like tea.',why:'He/She/It के साथ doesn\'t use होता है।'},
+      {w:'He eat rice every day.',r:'He eats rice every day.',why:'He/She/It के साथ verb में s/es लगाते हैं।'},
+      {w:'I am go to school.',r:'I go to school.',why:'Simple Present में am/is/are नहीं लगता।'},
+    ]},
+    {type:'phrases', title:'📝 Present Simple Sentences', phrases:[
+      {en:'I wake up at 6 AM every day.',hi:'मैं हर रोज़ 6 बजे उठता हूँ।',pr:'आई वेक अप ऐट 6 AM एव्री डे'},
+      {en:'She works in a hospital.',hi:'वह एक अस्पताल में काम करती है।',pr:'शी वर्क्स इन अ हॉस्पिटल'},
+      {en:'They play cricket on Sundays.',hi:'वे रविवार को क्रिकेट खेलते हैं।',pr:'दे प्ले क्रिकेट ऑन संडेज़'},
+      {en:'He doesn\'t eat meat.',hi:'वह माँस नहीं खाता।',pr:'ही डज़न्ट ईट मीट'},
+      {en:'Do you speak Hindi?',hi:'क्या आप हिंदी बोलते हैं?',pr:'डू यू स्पीक हिंदी?'},
+    ]},
+    {type:'quiz', q:'सही sentence चुनो:', opts:['She don\'t know.','She doesn\'t know.','She not know.','She is not knowing.'], ans:1, fb:'"She doesn\'t know." — She के साथ doesn\'t use करते हैं।'}
+  ]
+},{
+  id:9,week:2,
+  title:"Past Simple Tense",
+  desc:"भूतकाल — जो काम पहले हो चुका है। बातें सुनाना, किसी को बताना।",
+  blocks:[
+    {type:'rule', title:'📖 Past Simple Formula', content:`
+      <div class="formula">Subject + Verb(2nd form) + Object</div>
+      <div class="eg-good">✅ I ate food. / She went to school. / They played cricket.</div>
+      <div class="eg-bad">❌ I eated food. / She goed to school.</div>
+      <div style="margin-top:12px;"><b style="color:var(--gold)">Regular Verbs (नियमित):</b>
+        <div class="eg-good">Walk → Walked | Play → Played | Cook → Cooked</div>
+      </div>
+      <div style="margin-top:8px;"><b style="color:var(--rose)">Irregular Verbs (अनियमित) — याद करने पड़ते हैं:</b>
+        <table class="pron-table" style="margin-top:6px;">
+          <tr><th>Present</th><th>Past</th><th>Hindi</th></tr>
+          <tr><td>Go</td><td>Went</td><td>जाना</td></tr>
+          <tr><td>Eat</td><td>Ate</td><td>खाना</td></tr>
+          <tr><td>See</td><td>Saw</td><td>देखना</td></tr>
+          <tr><td>Come</td><td>Came</td><td>आना</td></tr>
+          <tr><td>Give</td><td>Gave</td><td>देना</td></tr>
+          <tr><td>Take</td><td>Took</td><td>लेना</td></tr>
+          <tr><td>Buy</td><td>Bought</td><td>खरीदना</td></tr>
+          <tr><td>Speak</td><td>Spoke</td><td>बोलना</td></tr>
+        </table>
+      </div>`},
+    {type:'phrases', title:'🗣️ Past Simple Sentences', phrases:[
+      {en:'I went to Delhi yesterday.',hi:'मैं कल दिल्ली गया था।',pr:'आई वेंट टू दिल्ली येस्टरडे'},
+      {en:'She cooked amazing food.',hi:'उसने शानदार खाना बनाया।',pr:'शी कुक्ड अमेजिंग फूड'},
+      {en:'We watched a movie last night.',hi:'हमने कल रात फ़िल्म देखी।',pr:'वी वॉच्ड अ मूवी लास्ट नाइट'},
+      {en:'Did you go to school today?',hi:'क्या आप आज स्कूल गए?',pr:'डिड यू गो टू स्कूल टुडे?'},
+      {en:'I didn\'t sleep well.',hi:'मुझे अच्छी नींद नहीं आई।',pr:'आई डिडन्ट स्लीप वेल'},
+    ]},
+    {type:'quiz', q:'"कल मैं बाज़ार गया था" = ?', opts:['Yesterday I go to market.','Yesterday I have gone.','Yesterday I went to the market.','Yesterday I was go to market.'], ans:2, fb:'"Yesterday I went to the market." — Past के लिए went (go का 2nd form) use होता है।'}
+  ]
+},{
+  id:10,week:2,
+  title:"Future Tense",
+  desc:"भविष्य की बात करना — plans, dreams, और promises!",
+  blocks:[
+    {type:'rule', title:'📖 Future Tense — 3 तरीके', content:`
+      <div style="margin-bottom:14px;">
+        <b style="color:var(--gold)">1. Will — अचानक decision या promise</b>
+        <div class="formula">Subject + will + Verb(base form)</div>
+        <div class="eg-good">I will help you. / She will come tomorrow.</div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <b style="color:var(--teal)">2. Going to — पहले से बना plan</b>
+        <div class="formula">Subject + am/is/are + going to + Verb</div>
+        <div class="eg-good">I am going to visit my uncle. / They are going to get married.</div>
+      </div>
+      <div>
+        <b style="color:var(--violet)">3. Present Continuous — fixed schedule</b>
+        <div class="formula">Subject + am/is/are + Verb-ing</div>
+        <div class="eg-good">I am flying to Mumbai tomorrow. (ticket book है)</div>
+      </div>`},
+    {type:'phrases', title:'🔮 Future Sentences', phrases:[
+      {en:'I will call you tomorrow.',hi:'मैं कल आपको call करूँगा।',pr:'आई विल कॉल यू टुमॉरो'},
+      {en:'She is going to start a new job.',hi:'वह नई नौकरी शुरू करने वाली है।',pr:'शी इज़ गोइंग टू स्टार्ट अ न्यू जॉब'},
+      {en:'We will not be late.',hi:'हम देर नहीं करेंगे।',pr:'वी विल नॉट बी लेट'},
+      {en:'What will you do tomorrow?',hi:'कल आप क्या करेंगे?',pr:'व्हॉट विल यू डू टुमॉरो?'},
+      {en:'It is going to rain.',hi:'बारिश होने वाली है।',pr:'इट इज़ गोइंग टू रेन'},
+    ]},
+    {type:'quiz', q:'"मैं कल आऊँगा" को सही तरह से कहो:', opts:['I will coming tomorrow.','I will come tomorrow.','I am come tomorrow.','I will comes tomorrow.'], ans:1, fb:'"I will come tomorrow." — Will के बाद verb का base form लगता है।'}
+  ]
+},{
+  id:11,week:2,
+  title:"Questions — सवाल पूछना",
+  desc:"अच्छे सवाल पूछना बहुत ज़रूरी है। Wh- questions और Yes/No questions सीखें।",
+  blocks:[
+    {type:'rule', title:'❓ Wh- Questions', content:`
+      <table class="pron-table">
+        <tr><th>Word</th><th>Hindi</th><th>Example</th></tr>
+        <tr><td>What</td><td>क्या</td><td>What is your job?</td></tr>
+        <tr><td>Where</td><td>कहाँ</td><td>Where do you live?</td></tr>
+        <tr><td>When</td><td>कब</td><td>When is your birthday?</td></tr>
+        <tr><td>Why</td><td>क्यों</td><td>Why are you late?</td></tr>
+        <tr><td>Who</td><td>कौन</td><td>Who is your teacher?</td></tr>
+        <tr><td>How</td><td>कैसे/कितना</td><td>How are you? How much?</td></tr>
+        <tr><td>Which</td><td>कौन सा</td><td>Which colour do you like?</td></tr>
+        <tr><td>How many</td><td>कितने (गिने जाने वाले)</td><td>How many brothers?</td></tr>
+        <tr><td>How much</td><td>कितना (न गिने जाने वाले)</td><td>How much water?</td></tr>
+      </table>`},
+    {type:'phrases', title:'💬 Useful Questions', phrases:[
+      {en:'What do you do for a living?',hi:'आप जीविका के लिए क्या करते हैं?',pr:'व्हॉट डू यू डू फॉर अ लिविंग?'},
+      {en:'How long have you been here?',hi:'आप यहाँ कब से हैं?',pr:'हाउ लॉन्ग हैव यू बीन हियर?'},
+      {en:'Can you tell me the way to...?',hi:'क्या आप...का रास्ता बता सकते हैं?',pr:'कैन यू टेल मी द वे टू...?'},
+      {en:'How far is it from here?',hi:'यहाँ से कितनी दूर है?',pr:'हाउ फार इज़ इट फ्रॉम हियर?'},
+      {en:'Could you repeat that, please?',hi:'क्या आप दोबारा कह सकते हैं?',pr:'कुड यू रिपीट दैट, प्लीज़?'},
+    ]},
+    {type:'quiz', q:'"कहाँ" के लिए कौन सा Wh-word use होता है?', opts:['What','When','Where','Why'], ans:2, fb:'"Where" = कहाँ। Example: "Where do you live?" = आप कहाँ रहते हैं?'}
+  ]
+},{
+  id:12,week:2,
+  title:"Daily Routine — दिनचर्या",
+  desc:"अपनी daily life के बारे में fluently बात करना। यह सबसे common topic है!",
+  blocks:[
+    {type:'phrases', title:'🌅 Morning Routine', phrases:[
+      {en:'I wake up at 6 in the morning.',hi:'मैं सुबह 6 बजे उठता हूँ।',pr:'आई वेक अप ऐट 6 इन द मॉर्निंग'},
+      {en:'I brush my teeth and take a shower.',hi:'मैं दाँत साफ करता हूँ और नहाता हूँ।',pr:'आई ब्रश माई टीथ एंड टेक अ शावर'},
+      {en:'I have breakfast at 7:30.',hi:'मैं 7:30 बजे नाश्ता करता हूँ।',pr:'आई हैव ब्रेकफास्ट ऐट 7:30'},
+      {en:'I leave for work/school at 8.',hi:'मैं 8 बजे काम/स्कूल के लिए निकलता हूँ।',pr:'आई लीव फॉर वर्क ऐट 8'},
+    ]},
+    {type:'phrases', title:'🌙 Evening/Night Routine', phrases:[
+      {en:'I come home at 6 PM.',hi:'मैं शाम 6 बजे घर आता हूँ।',pr:'आई कम होम ऐट 6 PM'},
+      {en:'I watch TV for an hour.',hi:'मैं एक घंटे TV देखता हूँ।',pr:'आई वॉच TV फॉर एन आवर'},
+      {en:'I have dinner with my family.',hi:'मैं परिवार के साथ रात का खाना खाता हूँ।',pr:'आई हैव डिनर विद माई फैमिली'},
+      {en:'I go to bed at 10:30.',hi:'मैं 10:30 बजे सो जाता हूँ।',pr:'आई गो टू बेड ऐट 10:30'},
+    ]},
+    {type:'tip', icon:'📝', text:`<strong>Exercise:</strong> अपनी पूरी daily routine English में लिखो। कम से कम 10 sentences। फिर किसी को सुनाओ — यह आपकी speaking को natural बनाएगा।`},
+    {type:'quiz', q:'"मैं 7 बजे नाश्ता करता हूँ।" = ?', opts:['I eat breakfast on 7.','I take breakfast at 7.','I have breakfast at 7.','I do breakfast at 7.'], ans:2, fb:'"Have breakfast" — meal के लिए "have" use करते हैं: have breakfast, have lunch, have dinner.'}
+  ]
+},{
+  id:13,week:2,
+  title:"Shopping & Money",
+  desc:"दुकान पर, mall में, या online — shopping के लिए ज़रूरी English!",
+  blocks:[
+    {type:'phrases', title:'🛒 Shopping Phrases', phrases:[
+      {en:'How much does this cost?',hi:'इसकी कीमत कितनी है?',pr:'हाउ मच डज़ दिस कॉस्ट?'},
+      {en:'That is too expensive.',hi:'यह बहुत महंगा है।',pr:'दैट इज़ टू एक्सपेंसिव'},
+      {en:'Do you have a cheaper option?',hi:'क्या आपके पास सस्ता विकल्प है?',pr:'डू यू हैव अ चीपर ऑप्शन?'},
+      {en:'Can I try this on?',hi:'क्या मैं यह पहनकर देख सकता हूँ?',pr:'कैन आई ट्राई दिस ऑन?'},
+      {en:'I will take this one.',hi:'मैं यह लूँगा।',pr:'आई विल टेक दिस वन'},
+      {en:'Do you accept cards?',hi:'क्या आप card लेते हैं?',pr:'डू यू एक्सेप्ट कार्ड्स?'},
+      {en:'I need a receipt.',hi:'मुझे receipt चाहिए।',pr:'आई नीड अ रिसीट'},
+      {en:'This is the wrong size.',hi:'यह गलत size है।',pr:'दिस इज़ द रॉन्ग साइज़'},
+    ]},
+    {type:'conversation', title:'💬 At a Clothing Store', lines:[
+      {sp:'A',text:'Excuse me, how much is this shirt?',hi:'माफ़ करिए, यह शर्ट कितने की है?'},
+      {sp:'B',text:'It is 800 rupees.',hi:'यह 800 रुपए की है।'},
+      {sp:'A',text:'That is too expensive. Can you give me a discount?',hi:'यह बहुत महंगी है। क्या आप discount दे सकते हैं?'},
+      {sp:'B',text:'I can give you 10% off. So it will be 720 rupees.',hi:'मैं 10% छूट दे सकता हूँ। तो 720 रुपए होंगे।'},
+      {sp:'A',text:'Okay, I will take it. Do you accept cards?',hi:'ठीक है, मैं लूँगा। क्या आप card लेते हैं?'},
+    ]},
+    {type:'quiz', q:'"यह बहुत महंगा है" = ?', opts:['This is very cheap.','That is too expensive.','I need more money.','Can you lower the price?'], ans:1, fb:'"That is too expensive." — Expensive = महंगा, Cheap = सस्ता।'}
+  ]
+},{
+  id:14,week:2,
+  title:"Week 2 Review — Sentences & Tenses",
+  desc:"दूसरे हफ्ते का review। Present, Past, Future और daily conversation का अभ्यास।",
+  blocks:[
+    {type:'rule', title:'📋 Week 2 — Tense Summary', content:`
+      <table class="pron-table">
+        <tr><th>Tense</th><th>Formula</th><th>Example</th></tr>
+        <tr><td style="color:var(--gold)">Present Simple</td><td>Subject + Verb(s/es)</td><td>She eats rice.</td></tr>
+        <tr><td style="color:var(--teal)">Past Simple</td><td>Subject + Verb(2nd form)</td><td>She ate rice.</td></tr>
+        <tr><td style="color:var(--violet)">Future (will)</td><td>Subject + will + Verb</td><td>She will eat rice.</td></tr>
+        <tr><td style="color:var(--orange)">Future (going to)</td><td>Subject + am/is/are + going to + Verb</td><td>She is going to eat.</td></tr>
+      </table>`},
+    {type:'celebrate', title:'🎉 Week 2 Complete!', msg:'शाबाश! अब आप तीनों tenses में बात कर सकते हैं। Shopping, daily routine, और questions — सब आ गया!'},
+    {type:'quiz', q:'Correct sentence चुनो:', opts:['Yesterday she go to school.','Yesterday she goes to school.','Yesterday she went to school.','Yesterday she has go to school.'], ans:2, fb:'"Yesterday she went to school." — Past के साथ went (went = go का 2nd form)।'}
+  ]
+},
+// ==================== WEEK 3 ====================
+{
+  id:15,week:3,
+  title:"Present Continuous Tense",
+  desc:"अभी इस वक्त क्या हो रहा है — इसे Express करना सीखें।",
+  blocks:[
+    {type:'rule', title:'📖 Present Continuous', content:`
+      <div class="formula">Subject + am/is/are + Verb-ing</div>
+      <div class="eg-good">✅ I am reading a book. (मैं किताब पढ़ रहा हूँ।)</div>
+      <div class="eg-good">✅ She is cooking food. (वह खाना बना रही है।)</div>
+      <div class="eg-good">✅ They are playing outside. (वे बाहर खेल रहे हैं।)</div>
+      <div class="eg-bad">❌ She is knowing the answer.</div>
+      <div class="eg-note">
+        <b>❗Stative Verbs</b> — ये verbs -ing form में नहीं आते:<br>
+        know, understand, like, love, hate, need, want, see, hear, belong, own
+      </div>`},
+    {type:'phrases', title:'🗣️ Practice Sentences', phrases:[
+      {en:'What are you doing right now?',hi:'अभी आप क्या कर रहे हैं?',pr:'व्हॉट आर यू डूइंग राइट नाउ?'},
+      {en:'I am watching a cricket match.',hi:'मैं क्रिकेट मैच देख रहा हूँ।',pr:'आई एम वॉचिंग अ क्रिकेट मैच'},
+      {en:'It is raining heavily outside.',hi:'बाहर ज़ोरदार बारिश हो रही है।',pr:'इट इज़ रेनिंग हेविली आउटसाइड'},
+      {en:'She is not feeling well today.',hi:'आज उसकी तबीयत ठीक नहीं है।',pr:'शी इज़ नॉट फीलिंग वेल टुडे'},
+    ]},
+    {type:'quiz', q:'सही sentence:', opts:['I am knowing the answer.','I know the answer.','I am know the answer.','I knowing the answer.'], ans:1, fb:'"Know" एक stative verb है — इसमें -ing नहीं लगता। "I know" correct है।'}
+  ]
+},{
+  id:16,week:3,
+  title:"Modal Verbs — Can, Could, Should, Must",
+  desc:"इन verbs से हम ability, possibility, advice, और necessity express करते हैं।",
+  blocks:[
+    {type:'rule', title:'🔧 Modal Verbs Explained', content:`
+      <table class="pron-table">
+        <tr><th>Modal</th><th>Use</th><th>Example</th></tr>
+        <tr><td style="color:var(--gold)">Can</td><td>Ability/Permission</td><td>I can swim. / Can I sit here?</td></tr>
+        <tr><td style="color:var(--teal)">Could</td><td>Past ability / Polite request</td><td>I could run fast. / Could you help?</td></tr>
+        <tr><td style="color:var(--violet)">Should</td><td>Advice</td><td>You should drink water.</td></tr>
+        <tr><td style="color:var(--rose)">Must</td><td>Strong obligation</td><td>You must wear a helmet.</td></tr>
+        <tr><td style="color:var(--orange)">May/Might</td><td>Possibility</td><td>It may rain. / She might come.</td></tr>
+        <tr><td style="color:var(--blue)">Would</td><td>Polite / Conditional</td><td>I would like tea. / Would you help?</td></tr>
+      </table>`},
+    {type:'phrases', title:'💬 Using Modals', phrases:[
+      {en:'Can you speak English?',hi:'क्या आप English बोल सकते हैं?',pr:'कैन यू स्पीक इंग्लिश?'},
+      {en:'You should practice every day.',hi:'आपको हर रोज़ practice करनी चाहिए।',pr:'यू शुड प्रैक्टिस एव्री डे'},
+      {en:'I would like a glass of water.',hi:'मुझे एक गिलास पानी चाहिए।',pr:'आई वुड लाइक अ ग्लास ऑफ वॉटर'},
+      {en:'You must not smoke here.',hi:'आपको यहाँ धूम्रपान नहीं करना चाहिए।',pr:'यू मस्ट नॉट स्मोक हियर'},
+      {en:'Could you please open the door?',hi:'क्या आप कृपया दरवाज़ा खोल सकते हैं?',pr:'कुड यू प्लीज़ ओपन द डोर?'},
+    ]},
+    {type:'quiz', q:'Advice देने के लिए कौन सा modal use होता है?', opts:['Can','Must','Should','Would'], ans:2, fb:'"Should" advice के लिए use होता है। जैसे: "You should sleep early."'}
+  ]
+},{
+  id:17,week:3,
+  title:"Adjectives & Descriptions",
+  desc:"किसी भी चीज़, इंसान, या जगह को describe करना सीखें। आपकी English interesting बनेगी!",
+  blocks:[
+    {type:'vocab', title:'🎨 Common Adjectives', words:[
+      {em:'😊',en:'Happy',hi:'खुश',pr:'हैपी'},
+      {em:'😢',en:'Sad',hi:'उदास',pr:'सैड'},
+      {em:'💪',en:'Strong',hi:'मज़बूत',pr:'स्ट्रॉन्ग'},
+      {em:'🧠',en:'Smart',hi:'चतुर',pr:'स्मार्ट'},
+      {em:'😄',en:'Funny',hi:'मज़ेदार',pr:'फनी'},
+      {em:'🌟',en:'Beautiful',hi:'सुंदर',pr:'ब्यूटिफुल'},
+      {em:'👴',en:'Old',hi:'पुराना/बूढ़ा',pr:'ओल्ड'},
+      {em:'🆕',en:'New',hi:'नया',pr:'न्यू'},
+      {em:'⚡',en:'Fast',hi:'तेज़',pr:'फास्ट'},
+      {em:'🐢',en:'Slow',hi:'धीमा',pr:'स्लो'},
+      {em:'🌡️',en:'Hot',hi:'गर्म',pr:'हॉट'},
+      {em:'❄️',en:'Cold',hi:'ठंडा',pr:'कोल्ड'},
+    ]},
+    {type:'rule', title:'📖 Adjective Order', content:`
+      <div class="eg-note" style="font-size:.9rem;">जब कई adjectives एक साथ आते हैं, तो यह order follow होता है:</div>
+      <div class="formula">Opinion → Size → Age → Color → Origin → Material → Noun</div>
+      <div class="eg-good">✅ A beautiful big old red Indian wooden box.</div>
+      <div class="eg-note">Practically, 2-3 adjectives ही use होते हैं। जैसे: a tall young man / a small red car.</div>`},
+    {type:'phrases', title:'🗣️ Describing People & Things', phrases:[
+      {en:'She is a very kind and intelligent woman.',hi:'वह एक बहुत दयालु और बुद्धिमान महिला है।',pr:'शी इज़ अ वेरी काइंड एंड इंटेलिजेंट वुमन'},
+      {en:'This movie is quite boring.',hi:'यह फ़िल्म काफ़ी उबाऊ है।',pr:'दिस मूवी इज़ क्वाइट बोरिंग'},
+      {en:'The weather is absolutely wonderful today.',hi:'आज मौसम बिल्कुल शानदार है।',pr:'द वेदर इज़ एब्सोलूटली वंडरफुल टुडे'},
+    ]},
+    {type:'quiz', q:'Adjective किसे describe करता है?', opts:['Verb को','Noun को','Article को','Preposition को'], ans:1, fb:'Adjective noun को describe करता है। जैसे: "a beautiful flower" — यहाँ beautiful, flower (noun) को describe कर रहा है।'}
+  ]
+},{
+  id:18,week:3,
+  title:"Prepositions — In, On, At & More",
+  desc:"Prepositions सबसे confusing part है। आज इसे हमेशा के लिए clear करते हैं!",
+  blocks:[
+    {type:'rule', title:'📍 Place Prepositions', content:`
+      <table class="pron-table">
+        <tr><th>Preposition</th><th>Use</th><th>Example</th></tr>
+        <tr><td style="color:var(--gold)">In</td><td>अंदर (बड़ी जगह)</td><td>in Delhi, in the box, in India</td></tr>
+        <tr><td style="color:var(--teal)">On</td><td>ऊपर (surface)</td><td>on the table, on the wall</td></tr>
+        <tr><td style="color:var(--violet)">At</td><td>specific point</td><td>at home, at the door, at school</td></tr>
+        <tr><td style="color:var(--rose)">Under</td><td>नीचे</td><td>under the bed, under the tree</td></tr>
+        <tr><td style="color:var(--orange)">Between</td><td>दो के बीच</td><td>between you and me</td></tr>
+        <tr><td style="color:var(--blue)">Near / Next to</td><td>पास</td><td>near the station, next to me</td></tr>
+      </table>`},
+    {type:'rule', title:'⏰ Time Prepositions', content:`
+      <div class="eg-good"><b style="color:var(--gold)">At</b> — specific time: at 5 PM, at midnight, at noon</div>
+      <div class="eg-good"><b style="color:var(--teal)">On</b> — days & dates: on Monday, on 26th January</div>
+      <div class="eg-good"><b style="color:var(--violet)">In</b> — months, years, periods: in March, in 2024, in the morning</div>
+      <div class="eg-bad">❌ at Monday / on 5 PM / in Monday</div>`},
+    {type:'mistake', mistakes:[
+      {w:'I am at home in 5 PM.',r:'I am at home at 5 PM.',why:'Time के लिए "at" use होता है।'},
+      {w:'She lives on India.',r:'She lives in India.',why:'देश/शहर के लिए "in" use होता है।'},
+      {w:'The book is in the table.',r:'The book is on the table.',why:'Surface पर रखी चीज़ के लिए "on" use होता है।'},
+    ]},
+    {type:'quiz', q:'"मैं सोमवार को आऊँगा।" = "I will come ___ Monday."', opts:['in','at','on','to'], ans:2, fb:'"On Monday" — Days of week के साथ "on" use होता है।'}
+  ]
+},{
+  id:19,week:3,
+  title:"Telephone & Email English",
+  desc:"Phone पर बात करना और email लिखना — professional life के लिए ज़रूरी!",
+  blocks:[
+    {type:'phrases', title:'📱 Phone Conversation', phrases:[
+      {en:'Hello, this is Ravi speaking.',hi:'हेलो, मैं रवि बोल रहा हूँ।',pr:'हेलो, दिस इज़ रवि स्पीकिंग'},
+      {en:'May I speak to Sharma ji?',hi:'क्या मैं शर्मा जी से बात कर सकता हूँ?',pr:'मे आई स्पीक टू शर्मा जी?'},
+      {en:'Could you please hold on?',hi:'क्या आप थोड़ी देर रुक सकते हैं?',pr:'कुड यू प्लीज़ होल्ड ऑन?'},
+      {en:'He is not available right now.',hi:'वह अभी उपलब्ध नहीं हैं।',pr:'ही इज़ नॉट अवेलेबल राइट नाउ'},
+      {en:'Can I take a message?',hi:'क्या मैं message ले सकता हूँ?',pr:'कैन आई टेक अ मेसेज?'},
+      {en:'I will call back later.',hi:'मैं बाद में call करूँगा।',pr:'आई विल कॉल बैक लेटर'},
+    ]},
+    {type:'rule', title:'📧 Email Format', content:`
+      <div class="conv-box">
+        <div style="margin-bottom:8px;"><b style="color:var(--gold)">Subject:</b> <span>Meeting Request for Tomorrow</span></div>
+        <div style="margin-bottom:8px;"><b style="color:var(--teal)">Opening:</b> <span>Dear Sir/Ma'am, / Hello Rahul,</span></div>
+        <div style="margin-bottom:8px;"><b style="color:var(--violet)">Body:</b> <span>I hope this email finds you well. I am writing to...</span></div>
+        <div style="margin-bottom:8px;"><b style="color:var(--orange)">Closing:</b> <span>Thank you. Looking forward to hearing from you.</span></div>
+        <div><b style="color:var(--rose)">Sign off:</b> <span>Regards, / Best wishes, / Sincerely,</span></div>
+      </div>`},
+    {type:'quiz', q:'Phone पर अपना नाम बताने का सही तरीका:', opts:['I am calling.','Hello, this is Ravi speaking.','My name Ravi.','Ravi here calling.'], ans:1, fb:'"Hello, this is Ravi speaking." — Phone पर यही professional तरीका है।'}
+  ]
+},{
+  id:20,week:3,
+  title:"Health & Body",
+  desc:"Doctor के पास जाना, बीमारी बताना, और health के बारे में बात करना।",
+  blocks:[
+    {type:'vocab', title:'🩺 Body Parts', words:[
+      {em:'🧠',en:'Head',hi:'सिर',pr:'हेड'},
+      {em:'👁️',en:'Eye',hi:'आँख',pr:'आई'},
+      {em:'👂',en:'Ear',hi:'कान',pr:'ईयर'},
+      {em:'👃',en:'Nose',hi:'नाक',pr:'नोज़'},
+      {em:'👄',en:'Mouth',hi:'मुँह',pr:'माउथ'},
+      {em:'🦷',en:'Tooth',hi:'दाँत',pr:'टूथ'},
+      {em:'🫁',en:'Chest',hi:'सीना',pr:'चेस्ट'},
+      {em:'🦴',en:'Bone',hi:'हड्डी',pr:'बोन'},
+      {em:'💪',en:'Arm',hi:'बाँह',pr:'आर्म'},
+      {em:'🦵',en:'Leg',hi:'पैर',pr:'लेग'},
+    ]},
+    {type:'phrases', title:'🏥 At the Doctor', phrases:[
+      {en:'I am not feeling well.',hi:'मेरी तबीयत ठीक नहीं है।',pr:'आई एम नॉट फीलिंग वेल'},
+      {en:'I have a headache.',hi:'मुझे सिरदर्द है।',pr:'आई हैव अ हेडेक'},
+      {en:'I have a fever.',hi:'मुझे बुखार है।',pr:'आई हैव अ फीवर'},
+      {en:'My stomach is hurting.',hi:'मेरे पेट में दर्द है।',pr:'माई स्टमक इज़ हर्टिंग'},
+      {en:'Since how many days?',hi:'कितने दिनों से?',pr:'सिंस हाउ मेनी डेज़?'},
+      {en:'Take this medicine twice a day.',hi:'यह दवाई दिन में दो बार लें।',pr:'टेक दिस मेडिसिन ट्वाइस अ डे'},
+      {en:'Get some rest.',hi:'थोड़ा आराम करिए।',pr:'गेट सम रेस्ट'},
+    ]},
+    {type:'quiz', q:'"मुझे बुखार है" = ?', opts:['I have a cold.','I have a fever.','I am sick.','I feel pain.'], ans:1, fb:'"I have a fever." — बुखार के लिए "fever" और "I have a..." structure use होता है।'}
+  ]
+},{
+  id:21,week:3,
+  title:"Week 3 Review — Grammar Consolidation",
+  desc:"तीसरे हफ्ते का review। Grammar rules, modals, prepositions — सब एक जगह।",
+  blocks:[
+    {type:'mistake', mistakes:[
+      {w:'I am having a car.',r:'I have a car.',why:'Possession के लिए am having नहीं, सिर्फ "have" use होता है।'},
+      {w:'She is knowing French.',r:'She knows French.',why:'Know एक stative verb है — -ing form नहीं आती।'},
+      {w:'He can to swim.',r:'He can swim.',why:'Modal verbs (can, will, should) के बाद "to" नहीं लगता।'},
+      {w:'I am agree with you.',r:'I agree with you.',why:'Agree के साथ am/is/are नहीं लगता।'},
+      {w:'Tell me where is she?',r:'Tell me where she is.',why:'Indirect question में word order change होता है।'},
+    ]},
+    {type:'celebrate', title:'🎉 Week 3 Complete!', msg:'क्या बात है! अब आप advanced grammar जानते हैं — Modals, Prepositions, Continuous Tense। आप किसी भी situation में बात कर सकते हैं!'},
+    {type:'quiz', q:'"आपको रोज़ exercise करनी चाहिए।" = ?', opts:['You can exercise daily.','You must exercise daily.','You should exercise daily.','You will exercise daily.'], ans:2, fb:'"Should" advice के लिए use होता है। "Must" strong obligation के लिए।'}
+  ]
+},
+// ==================== WEEK 4 ====================
+{
+  id:22,week:4,
+  title:"Idioms & Expressions — Part 1",
+  desc:"Real English में idioms बहुत use होते हैं। इन्हें जानने के बाद आपकी English natural लगेगी!",
+  blocks:[
+    {type:'rule', title:'🗣️ Common English Idioms', content:`
+      <div class="mistake">
+        <div style="color:var(--gold);font-weight:700;">"Break a leg!"</div>
+        <div style="color:var(--teal);font-size:.88rem;">मतलब: Best of luck! / शुभकामनाएं।</div>
+        <div style="color:var(--muted);font-size:.82rem;">Example: You have an exam tomorrow? Break a leg!</div>
+      </div>
+      <div class="mistake">
+        <div style="color:var(--gold);font-weight:700;">"Hit the nail on the head"</div>
+        <div style="color:var(--teal);font-size:.88rem;">मतलब: बिल्कुल सही बात कहना।</div>
+        <div style="color:var(--muted);font-size:.82rem;">Example: You hit the nail on the head with that answer.</div>
+      </div>
+      <div class="mistake">
+        <div style="color:var(--gold);font-weight:700;">"Once in a blue moon"</div>
+        <div style="color:var(--teal);font-size:.88rem;">मतलब: कभी-कभार / बहुत कम।</div>
+        <div style="color:var(--muted);font-size:.82rem;">Example: I eat pizza once in a blue moon.</div>
+      </div>
+      <div class="mistake">
+        <div style="color:var(--gold);font-weight:700;">"Bite the bullet"</div>
+        <div style="color:var(--teal);font-size:.88rem;">मतलब: मुश्किल काम को हिम्मत से करना।</div>
+        <div style="color:var(--muted);font-size:.82rem;">Example: Just bite the bullet and tell the truth.</div>
+      </div>
+      <div class="mistake">
+        <div style="color:var(--gold);font-weight:700;">"It is raining cats and dogs"</div>
+        <div style="color:var(--teal);font-size:.88rem;">मतलब: बहुत तेज़ बारिश हो रही है।</div>
+        <div style="color:var(--muted);font-size:.82rem;">Example: I can't go out, it's raining cats and dogs.</div>
+      </div>`},
+    {type:'quiz', q:'"Break a leg" का सही मतलब है:', opts:['पैर तोड़ो','Best of luck','बहुत दर्द','रुक जाओ'], ans:1, fb:'"Break a leg" = Best of luck! Performance से पहले कहते हैं।'}
+  ]
+},{
+  id:23,week:4,
+  title:"Professional English — Office & Work",
+  desc:"Office में, interview में, presentation में — professional English!",
+  blocks:[
+    {type:'phrases', title:'💼 Office Phrases', phrases:[
+      {en:'Could we schedule a meeting?',hi:'क्या हम एक meeting schedule कर सकते हैं?',pr:'कुड वी शेड्यूल अ मीटिंग?'},
+      {en:'Please send me the report by tomorrow.',hi:'कल तक report भेज दीजिए।',pr:'प्लीज़ सेंड मी द रिपोर्ट बाय टुमॉरो'},
+      {en:'I will get back to you on this.',hi:'मैं इस पर आपको जवाब दूँगा।',pr:'आई विल गेट बैक टू यू ऑन दिस'},
+      {en:'Let us touch base tomorrow.',hi:'कल बात करते हैं।',pr:'लेट अस टच बेस टुमॉरो'},
+      {en:'That is a great idea!',hi:'यह एक शानदार idea है!',pr:'दैट इज़ अ ग्रेट आइडिया!'},
+      {en:'I would like to discuss this further.',hi:'मैं इस पर और बात करना चाहूँगा।',pr:'आई वुड लाइक टू डिस्कस दिस फर्दर'},
+    ]},
+    {type:'phrases', title:'🎤 Job Interview Phrases', phrases:[
+      {en:'I have 3 years of experience in this field.',hi:'मुझे इस क्षेत्र में 3 साल का अनुभव है।',pr:'आई हैव 3 ईयर्स ऑफ एक्सपीरियंस'},
+      {en:'My greatest strength is communication.',hi:'मेरी सबसे बड़ी शक्ति communication है।',pr:'माई ग्रेटेस्ट स्ट्रेंथ इज़ कम्यूनिकेशन'},
+      {en:'I am a quick learner.',hi:'मैं जल्दी सीख लेता हूँ।',pr:'आई एम अ क्विक लर्नर'},
+      {en:'I work well under pressure.',hi:'मैं दबाव में भी अच्छा काम करता हूँ।',pr:'आई वर्क वेल अंडर प्रेशर'},
+      {en:'When can I expect to hear back?',hi:'मुझे कब तक जवाब मिलेगा?',pr:'व्हेन कैन आई एक्सपेक्ट टू हियर बैक?'},
+    ]},
+    {type:'quiz', q:'Interview में experience बताने का सही तरीका:', opts:['I am having 3 years experience.','I have 3 years of experience.','My experience is of 3 years.','3 years I worked.'], ans:1, fb:'"I have 3 years of experience." — यह standard professional phrase है।'}
+  ]
+},{
+  id:24,week:4,
+  title:"Travel English",
+  desc:"Airport, hotel, tourism — जब आप कहीं जाएं तो यह English काम आएगी!",
+  blocks:[
+    {type:'phrases', title:'✈️ At the Airport', phrases:[
+      {en:'Where is the check-in counter?',hi:'Check-in counter कहाँ है?',pr:'व्हेयर इज़ द चेक-इन काउंटर?'},
+      {en:'I have a window seat.',hi:'मेरी window seat है।',pr:'आई हैव अ विंडो सीट'},
+      {en:'Is this flight on time?',hi:'क्या यह flight समय पर है?',pr:'इज़ दिस फ्लाइट ऑन टाइम?'},
+      {en:'My luggage is lost.',hi:'मेरा सामान गुम हो गया।',pr:'माई लगेज इज़ लॉस्ट'},
+    ]},
+    {type:'phrases', title:'🏨 At the Hotel', phrases:[
+      {en:'I have a reservation under the name...',hi:'मेरे नाम से booking है...',pr:'आई हैव अ रेज़र्वेशन अंडर द नेम'},
+      {en:'Could I have a room with a view?',hi:'क्या मुझे view वाला कमरा मिल सकता है?',pr:'कुड आई हैव अ रूम विद अ व्यू?'},
+      {en:'The air conditioner is not working.',hi:'AC काम नहीं कर रही।',pr:'द एयर कंडीशनर इज़ नॉट वर्किंग'},
+      {en:'What time is checkout?',hi:'Checkout किस समय है?',pr:'व्हॉट टाइम इज़ चेकआउट?'},
+      {en:'Can you recommend a good restaurant nearby?',hi:'क्या आप पास में कोई अच्छा restaurant suggest करेंगे?',pr:'कैन यू रेकमेंड अ गुड रेस्टोरेंट नियरबाई?'},
+    ]},
+    {type:'quiz', q:'"मेरा सामान गुम हो गया।" = ?', opts:['My bag is broken.','My luggage is lost.','I lost my wallet.','My things are gone.'], ans:1, fb:'"My luggage is lost." — Airport पर सामान खोने पर यही कहते हैं।'}
+  ]
+},{
+  id:25,week:4,
+  title:"Debate & Opinion — अपनी बात कहना",
+  desc:"अपनी राय देना, disagree करना, और politely argue करना — confident English बोलने के लिए!",
+  blocks:[
+    {type:'phrases', title:'🗣️ Expressing Opinion', phrases:[
+      {en:'In my opinion, this is the best option.',hi:'मेरी राय में, यह सबसे अच्छा विकल्प है।',pr:'इन माई ओपिनियन, दिस इज़ द बेस्ट ऑप्शन'},
+      {en:'I strongly believe that...',hi:'मुझे दृढ़ विश्वास है कि...',pr:'आई स्ट्रॉन्गली बिलीव दैट...'},
+      {en:'As far as I am concerned...',hi:'जहाँ तक मेरा सवाल है...',pr:'एज़ फार एज़ आई एम कन्सर्ंड...'},
+      {en:'From my point of view...',hi:'मेरे नज़रिए से...',pr:'फ्रॉम माई पॉइंट ऑफ व्यू...'},
+    ]},
+    {type:'phrases', title:'🤝 Agreeing & Disagreeing', phrases:[
+      {en:'I totally agree with you.',hi:'मैं आपसे पूरी तरह सहमत हूँ।',pr:'आई टोटली अग्री विद यू'},
+      {en:'That is a valid point.',hi:'यह एक valid बात है।',pr:'दैट इज़ अ वैलिड पॉइंट'},
+      {en:'I see your point, but...',hi:'मैं आपकी बात समझता हूँ, लेकिन...',pr:'आई सी योर पॉइंट, बट...'},
+      {en:'I respectfully disagree.',hi:'मैं विनम्रतापूर्वक असहमत हूँ।',pr:'आई रिस्पेक्टफुली डिसअग्री'},
+      {en:'Could you clarify that?',hi:'क्या आप इसे और स्पष्ट कर सकते हैं?',pr:'कुड यू क्लेरिफाई दैट?'},
+    ]},
+    {type:'quiz', q:'Politely disagree करने का सही तरीका:', opts:['You are wrong!','I respectfully disagree.','No, that is bad.','I do not agree at all.'], ans:1, fb:'"I respectfully disagree." — यह professional और polite way है असहमत होने का।'}
+  ]
+},{
+  id:26,week:4,
+  title:"Storytelling — कहानी सुनाना",
+  desc:"Past events और stories को interesting तरीके से बताना।",
+  blocks:[
+    {type:'rule', title:'📖 Storytelling Connectors', content:`
+      <div class="vocab-grid">
+        ${[
+          ['First of all','सबसे पहले'],['Then','फिर'],['After that','उसके बाद'],
+          ['Suddenly','अचानक'],['Meanwhile','इस बीच'],['Finally','आखिर में'],
+          ['In the end','अंत में'],['As a result','परिणामस्वरूप'],['Unfortunately','दुर्भाग्य से'],['Luckily','किस्मत से']
+        ].map(c=>`<div class="vocab-card" onclick="speak('${c[0]}')"><div class="v-en">${c[0]}</div><div class="v-hi">${c[1]}</div></div>`).join('')}
+      </div>`},
+    {type:'conversation', title:'💬 Story Example', lines:[
+      {sp:'A',text:'Let me tell you what happened yesterday.',hi:'मैं आपको बताता हूँ कल क्या हुआ।'},
+      {sp:'A',text:'First of all, I missed my morning bus.',hi:'सबसे पहले, मेरी सुबह की बस छूट गई।'},
+      {sp:'A',text:'Then, I decided to take an auto.',hi:'फिर मैंने auto लेने का फैसला किया।'},
+      {sp:'A',text:'Suddenly, it started raining heavily.',hi:'अचानक, ज़ोरदार बारिश शुरू हो गई।'},
+      {sp:'A',text:'Luckily, I found a shelter and waited.',hi:'किस्मत से मुझे एक छत मिली और मैं रुक गया।'},
+      {sp:'A',text:'Finally, I reached office 2 hours late!',hi:'आखिर में, मैं दफ्तर 2 घंटे देर से पहुँचा!'},
+      {sp:'B',text:'Oh no! What did your boss say?',hi:'अरे! आपके बॉस ने क्या कहा?'},
+    ]},
+    {type:'quiz', q:'"अचानक" के लिए कौन सा word use होगा?', opts:['Finally','Meanwhile','Suddenly','Therefore'], ans:2, fb:'"Suddenly" = अचानक। Stories में यह बहुत common connector है।'}
+  ]
+},{
+  id:27,week:4,
+  title:"Advanced Vocabulary",
+  desc:"रोज़ की vocabulary को upgrade करो — common words के better alternatives!",
+  blocks:[
+    {type:'rule', title:'⬆️ Upgrade Your Vocabulary', content:`
+      <table class="pron-table">
+        <tr><th>Common Word</th><th>Better Word</th><th>Hindi</th></tr>
+        <tr><td>Good</td><td>Excellent / Outstanding / Splendid</td><td>शानदार</td></tr>
+        <tr><td>Bad</td><td>Dreadful / Terrible / Awful</td><td>भयंकर</td></tr>
+        <tr><td>Big</td><td>Massive / Enormous / Gigantic</td><td>विशाल</td></tr>
+        <tr><td>Small</td><td>Tiny / Minute / Petite</td><td>बहुत छोटा</td></tr>
+        <tr><td>Happy</td><td>Ecstatic / Thrilled / Elated</td><td>अत्यंत खुश</td></tr>
+        <tr><td>Sad</td><td>Devastated / Heartbroken / Gloomy</td><td>टूटा हुआ</td></tr>
+        <tr><td>Walk</td><td>Stroll / March / Wander</td><td>टहलना/मार्च</td></tr>
+        <tr><td>Talk</td><td>Discuss / Chat / Converse</td><td>चर्चा करना</td></tr>
+        <tr><td>Very</td><td>Extremely / Incredibly / Remarkably</td><td>अत्यधिक</td></tr>
+        <tr><td>A lot</td><td>Plenty / Numerous / Abundant</td><td>प्रचुर मात्रा में</td></tr>
+      </table>`},
+    {type:'tip', icon:'📚', text:`<strong>Daily Habit:</strong> हर रोज़ एक नया word सीखो और उसे 5 बार अलग-अलग sentences में use करो। इसे "Word of the Day" practice कहते हैं। 1 साल में 365 नए words!`},
+    {type:'quiz', q:'"Very big" को एक word में कहो:', opts:['Hugely','Enormous','Bigly','Greatly'], ans:1, fb:'"Enormous" = बहुत बड़ा। एक powerful adjective है।'}
+  ]
+},{
+  id:28,week:4,
+  title:"Common English Mistakes — Final Fix",
+  desc:"सबसे common 15 mistakes जो Indians करते हैं — आज इन्हें हमेशा के लिए fix करते हैं!",
+  blocks:[
+    {type:'mistake', mistakes:[
+      {w:'I want that you should come.',r:'I want you to come.',why:'Want + object + to + verb — यह English structure है।'},
+      {w:'My this phone',r:'This phone of mine / My phone',why:'"My" और "this" साथ नहीं आते।'},
+      {w:'Please do one thing.',r:'Please do this / Please help me with...',why:'"Do one thing" — यह Hinglish है, native speakers यह नहीं बोलते।'},
+      {w:'I am not getting it.',r:'I do not understand. / I am not able to get it.',why:'Simple context में "I don\'t understand" ज़्यादा natural है।'},
+      {w:'He gave me good news.',r:'He gave me some good news.',why:'"News" uncountable है — "a news" नहीं, "some news" या "a piece of news"।'},
+      {w:'I did a mistake.',r:'I made a mistake.',why:'Mistake के साथ "make" use होता है, "do" नहीं।'},
+      {w:'She is more better.',r:'She is better.',why:'"More better" गलत है। "Good → Better → Best" — comparatives के साथ more नहीं।'},
+    ]},
+    {type:'tip', icon:'⚡', text:`<strong>Golden Rule:</strong> जब भी बोलते समय कोई sentence अटपटा लगे, तो रुको और सोचो — क्या यह Hindi को directly translate कर रहे हो? अगर हाँ, तो शायद वह गलत है।`},
+    {type:'quiz', q:'"मैंने गलती की।" सही translation:', opts:['I did a mistake.','I made a mistake.','I committed a mistake.','I have done mistake.'], ans:1, fb:'"I made a mistake." — Mistake के साथ always "make" use करते हैं।'}
+  ]
+},{
+  id:29,week:4,
+  title:"Fluency Practice — Speaking Drills",
+  desc:"Fluency बढ़ाने के लिए special exercises — बिना रुके, बिना सोचे बोलना सीखो!",
+  blocks:[
+    {type:'rule', title:'🎯 Fluency Techniques', content:`
+      <div class="tip-highlight">
+        <div class="tip-icon">1️⃣</div>
+        <div class="tip-body"><strong>Shadowing:</strong> किसी English video को सुनो और हर sentence को तुरंत बाद में repeat करो। Netflix, YouTube — सब काम आएगा।</div>
+      </div>
+      <div class="tip-highlight">
+        <div class="tip-icon">2️⃣</div>
+        <div class="tip-body"><strong>Think in English:</strong> अपने दिन के हर छोटे काम को English में सोचो। "I am drinking tea. It is hot."</div>
+      </div>
+      <div class="tip-highlight">
+        <div class="tip-icon">3️⃣</div>
+        <div class="tip-body"><strong>60-Second Challenge:</strong> एक timer लगाओ और 60 seconds तक बिना रुके किसी topic पर English बोलते रहो। Topic: My day / My family / My city।</div>
+      </div>
+      <div class="tip-highlight">
+        <div class="tip-icon">4️⃣</div>
+        <div class="tip-body"><strong>Filler Words:</strong> जब बोलते हुए अटको तो घबराओ नहीं। Use करो: "Well...", "You know...", "I mean...", "Actually...", "Let me think..."</div>
+      </div>`},
+    {type:'phrases', title:'💬 Filler Phrases — रुकने पर', phrases:[
+      {en:'Let me think for a moment...',hi:'मुझे एक पल सोचने दीजिए...',pr:'लेट मी थिंक फॉर अ मोमेंट'},
+      {en:'What I mean to say is...',hi:'मेरा मतलब है कि...',pr:'व्हॉट आई मीन टू से इज़...'},
+      {en:'How can I put this...',hi:'इसे कैसे बताऊँ...',pr:'हाउ कैन आई पुट दिस...'},
+      {en:'That is a good question.',hi:'यह एक अच्छा सवाल है।',pr:'दैट इज़ अ गुड क्वेश्चन'},
+    ]},
+    {type:'quiz', q:'Fluency के लिए सबसे अच्छी technique:', opts:['सिर्फ grammar पढ़ो','Shadowing — सुनो और repeat करो','Dictionary रटो','Translation करो'], ans:1, fb:'"Shadowing" सबसे effective technique है। सुनो, repeat करो, pronunciation और rhythm naturally improve होती है।'}
+  ]
+},{
+  id:30,week:4,
+  title:"🎓 Day 30 — Graduation & Final Test",
+  desc:"बधाई हो! आपने 30 दिन की यात्रा पूरी की। आज का final review और celebration!",
+  blocks:[
+    {type:'rule', title:'📋 30 Days ka Summary', content:`
+      <div class="eg-good">✅ Week 1: Alphabets, Greetings, Numbers, Colors, Family, Food</div>
+      <div class="eg-good">✅ Week 2: Present/Past/Future Tense, Questions, Daily Routine, Shopping</div>
+      <div class="eg-good">✅ Week 3: Continuous Tense, Modals, Adjectives, Prepositions, Health, Office</div>
+      <div class="eg-good">✅ Week 4: Idioms, Professional English, Travel, Opinion, Storytelling, Advanced Vocabulary</div>
+      <br>
+      <div style="color:var(--gold);font-weight:700;font-size:1.1rem;">आपने सीखा:</div>
+      <div class="eg-good">📚 200+ phrases और sentences</div>
+      <div class="eg-good">📖 500+ vocabulary words</div>
+      <div class="eg-good">⚙️ 6 grammar tenses</div>
+      <div class="eg-good">💼 Professional English skills</div>
+      <div class="eg-good">🗣️ Fluency techniques</div>`},
+    {type:'conversation', title:'💬 Final Conversation — Use Everything!', lines:[
+      {sp:'A',text:'Good morning! How are you doing today?',hi:'सुप्रभात! आज आप कैसे हैं?'},
+      {sp:'B',text:'I am doing really well, thanks! I just finished a big project at work.',hi:'मैं बहुत अच्छा कर रहा हूँ, धन्यवाद! मैंने अभी काम पर एक बड़ा project खत्म किया।'},
+      {sp:'A',text:'That is excellent! How long did it take you?',hi:'यह शानदार है! इसमें कितना समय लगा?'},
+      {sp:'B',text:'It took about three weeks. I had to work really hard, but luckily my team was very supportive.',hi:'लगभग तीन हफ्ते लगे। मुझे बहुत मेहनत करनी पड़ी, लेकिन किस्मत से मेरी team बहुत supportive थी।'},
+      {sp:'A',text:'You should celebrate! What are you going to do this weekend?',hi:'आपको celebrate करना चाहिए! इस weekend आप क्या करेंगे?'},
+      {sp:'B',text:'I am planning to take my family out for dinner. By the way, do you know any good restaurants nearby?',hi:'मैं परिवार को dinner पर ले जाने की planning कर रहा हूँ। वैसे, क्या आप पास में कोई अच्छा restaurant जानते हैं?'},
+    ]},
+    {type:'celebrate', title:'🎓 CONGRATULATIONS!', msg:'आपने 30 दिन की English course पूरी कर ली! अब आप basic se advanced English बोल सकते हैं। याद रखें — practice रोज़ करते रहें। आपकी English journey अभी शुरू हुई है, खत्म नहीं! 🚀'},
+    {type:'tip', icon:'🌟', text:`<strong>आगे क्या करें?</strong><br>
+      1. रोज़ English newspaper/article पढ़ो<br>
+      2. English में diary लिखो<br>
+      3. English movies बिना subtitles के देखो<br>
+      4. Language exchange partner ढूंढो<br>
+      5. इस course को दोबारा करो!`},
+    {type:'quiz', q:'30 दिन बाद आप अब क्या कर सकते हैं?', opts:['सिर्फ hello कहना','Basic se Advanced English बोलना','केवल grammar जानना','सिर्फ लिखना'], ans:1, fb:'🎉 बिल्कुल सही! आप अब basic se advanced English बोल सकते हैं। आप पर गर्व है!'}
+  ]
+}
+];
+
+// ============================================================
+// RENDER
+// ============================================================
+const completedDays = new Set(JSON.parse(localStorage.getItem('completedDays30') || '[]'));
+let currentDay = 1;
+
+function buildSidebar() {
+  [1,2,3,4].forEach(w => {
+    const container = document.getElementById('sidebarW'+w);
+    days.filter(d=>d.week===w).forEach(d=>{
+      const el = document.createElement('div');
+      el.className = 'day-item' + (d.id===1?' active':'') + (completedDays.has(d.id)?' done':'');
+      el.id = 'sidebar-day-'+d.id;
+      el.textContent = 'Day '+d.id+': '+d.title.replace(/^[^\s]+ /,'').substring(0,22)+'...';
+      el.onclick = () => goToDay(d.id);
+      container.appendChild(el);
+    });
+  });
+}
+
+function buildDayContent(day) {
+  const container = document.getElementById('dayContent');
+  const existing = document.getElementById('day-sec-'+day.id);
+  if (existing) return;
+
+  const sec = document.createElement('div');
+  sec.className = 'day-section';
+  sec.id = 'day-sec-'+day.id;
+
+  let html = `<div class="day-header">
+    <div class="day-num-badge">📅 Day ${day.id} / 30 · Week ${day.week}</div>
+    <div class="day-title">${day.title}</div>
+    <div class="day-desc">${day.desc}</div>
+  </div>`;
+
+  day.blocks.forEach(block => {
+    if (block.type === 'overview') {
+      html += `<div class="lesson-block"><div class="block-title">🗓️ Course Overview</div>${block.content}</div>`;
+    } else if (block.type === 'rule') {
+      html += `<div class="lesson-block"><div class="block-title">${block.title}</div>${block.content}</div>`;
+    } else if (block.type === 'phrases') {
+      html += `<div class="lesson-block"><div class="block-title">${block.title}</div>`;
+      block.phrases.forEach(p => {
+        html += `<div class="phrase-row" onclick="speak('${p.en.replace(/'/g,"\\'")}')">
+          <button class="speak-btn" onclick="event.stopPropagation();speak('${p.en.replace(/'/g,"\\'")}')">🔊</button>
+          <div><div class="phrase-en">${p.en}</div><div class="phrase-hi">${p.hi}</div><div class="phrase-pron">📢 ${p.pr}</div></div>
+        </div>`;
+      });
+      html += `</div>`;
+    } else if (block.type === 'vocab') {
+      html += `<div class="lesson-block"><div class="block-title">${block.title}</div><div class="vocab-grid">`;
+      block.words.forEach(w => {
+        html += `<div class="vocab-card" onclick="speak('${w.en}')">
+          <div class="v-emoji">${w.em}</div>
+          <div class="v-en">${w.en}</div>
+          <div class="v-hi">${w.hi}</div>
+          <div class="v-pron">${w.pr}</div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    } else if (block.type === 'conversation') {
+      html += `<div class="lesson-block"><div class="block-title">${block.title}</div><div class="conv-box">`;
+      block.lines.forEach(l => {
+        html += `<div class="conv-line">
+          <div class="conv-speaker ${l.sp==='A'?'a':'b'}">${l.sp==='A'?'Person A':'Person B'}</div>
+          <div><div class="conv-text" onclick="speak('${l.text.replace(/'/g,"\\'")}'); return false;">${l.text} <span style="font-size:.75rem;color:var(--muted)">🔊</span></div><div class="conv-hi">${l.hi}</div></div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    } else if (block.type === 'mistake') {
+      html += `<div class="lesson-block"><div class="block-title">❌ Common Mistakes</div>`;
+      block.mistakes.forEach(m => {
+        html += `<div class="mistake">
+          <div class="m-wrong">❌ ${m.w}</div>
+          <div class="m-right">✅ ${m.r}</div>
+          <div class="m-why">📌 ${m.why}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    } else if (block.type === 'tip') {
+      html += `<div class="tip-highlight"><div class="tip-icon">${block.icon}</div><div class="tip-body">${block.text}</div></div>`;
+    } else if (block.type === 'celebrate') {
+      html += `<div class="celebrate"><div class="celebrate-emoji">🎉</div><h3>${block.title}</h3><p>${block.msg}</p></div>`;
+    } else if (block.type === 'quiz') {
+      html += `<div class="lesson-block"><div class="block-title">🎯 Quick Quiz</div>
+        <div class="mini-quiz">
+          <div class="mq-q">${block.q}</div>
+          <div class="mq-opts">
+            ${block.opts.map((o,i)=>`<button class="mq-opt" id="q${day.id}-opt${i}" onclick="checkMQ(${day.id},${i},${block.ans},'${block.fb.replace(/'/g,"\\'")}',${block.opts.length})">${o}</button>`).join('')}
+          </div>
+          <div class="mq-fb" id="q${day.id}-fb"></div>
+        </div>
+      </div>`;
+    }
+  });
+
+  // Nav buttons
+  html += `<div class="day-nav">`;
+  if (day.id > 1) html += `<button class="nav-btn" onclick="goToDay(${day.id-1})">← Previous Day</button>`;
+  html += `<button class="nav-btn done-btn" onclick="markDone(${day.id})">✓ Mark as Complete</button>`;
+  if (day.id < 30) html += `<button class="nav-btn primary" onclick="goToDay(${day.id+1})">Next Day →</button>`;
+  html += `</div>`;
+
+  sec.innerHTML = html;
+  container.appendChild(sec);
+}
+
+function goToDay(id) {
+  const day = days.find(d=>d.id===id);
+  if (!day) return;
+  buildDayContent(day);
+  document.querySelectorAll('.day-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('day-sec-'+id).classList.add('active');
+  document.querySelectorAll('.day-item').forEach(el=>el.classList.remove('active'));
+  const sideEl = document.getElementById('sidebar-day-'+id);
+  if (sideEl) sideEl.classList.add('active');
+  currentDay = id;
+  mainContent.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
+  closeSidebar();
+}
+
+function checkMQ(dayId, chosen, correct, fb, numOpts) {
+  for (let i=0;i<numOpts;i++) {
+    const el = document.getElementById(`q${dayId}-opt${i}`);
+    if (!el) continue;
+    el.disabled = true;
+    if (i===correct) el.classList.add('ok');
+    else if (i===chosen) el.classList.add('no');
+  }
+  const fbEl = document.getElementById(`q${dayId}-fb`);
+  if (fbEl) {
+    fbEl.textContent = chosen===correct ? '✅ सही! '+fb : '❌ गलत। '+fb;
+    fbEl.className = 'mq-fb show '+(chosen===correct?'ok':'no');
+  }
+}
+
+function markDone(id) {
+  completedDays.add(id);
+  try { localStorage.setItem('completedDays30', JSON.stringify([...completedDays])); } catch(e){}
+  const sideEl = document.getElementById('sidebar-day-'+id);
+  if (sideEl) sideEl.classList.add('done');
+  updateProgress();
+}
+
+function updateProgress() {
+  const count = completedDays.size;
+  document.getElementById('progFill').style.width = (count/30*100)+'%';
+  document.getElementById('progCount').textContent = count+'/30';
+}
+
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  }
+}
+
+function openSidebar(){
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebarOverlay').classList.add('show');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildSidebar();
+buildDayContent(days[0]);
+document.getElementById('day-sec-1').classList.add('active');
+updateProgress();
+</script>
+</body>
+</html>
